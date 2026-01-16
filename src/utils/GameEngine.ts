@@ -239,7 +239,7 @@ function isSafeInBox(board: number[][], row: number, col: number, num: number) {
 }
 
 // Validity Checker (Public)
-export const validateBoard = (board: BoardState): boolean => {
+export const validateBoard = (_board: BoardState): boolean => {
     // Simple check: are there errors? 
     // Real check: re-run isSafe logic for all filled cells
     // For visual feedback, we usually update 'error' prop on cells.

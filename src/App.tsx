@@ -6,7 +6,7 @@ import './index.css';
 
 function App() {
   const [board, setBoard] = useState<BoardState>([]);
-  const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
+  const [difficulty, _setDifficulty] = useState<'easy' | 'medium' | 'hard'>('easy');
   const [selectedCell, setSelectedCell] = useState<[number, number] | null>(null);
   const [isNotesMode, setIsNotesMode] = useState(false);
   const [history, setHistory] = useState<BoardState[]>([]);
