@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  sudoku-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sudoku-pro-max
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - sudoku-network
+
+networks:
+  sudoku-network:
+    driver: bridge
