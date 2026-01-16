@@ -48,27 +48,36 @@ The app will be available at `http://localhost:5173`
 
 ## 🐳 Docker Deployment
 
-### Using Docker Compose (Recommended)
+### Option 1: Pull from GitHub Container Registry (Recommended)
 
 ```bash
-# Build and start the container
+# Pull and run the latest image
+docker run -d -p 3000:80 ghcr.io/tmptr/sudoku-pro-max:latest
+
+# Or use docker-compose
+# Update docker-compose.yml to use: image: ghcr.io/tmptr/sudoku-pro-max:latest
+docker-compose up -d
+```
+
+### Option 2: Pull from Docker Hub
+
+```bash
+# Pull and run from Docker Hub
+docker run -d -p 3000:80 <your-dockerhub-username>/sudoku-pro-max:latest
+```
+
+### Option 3: Build Locally
+
+```bash
+# Using Docker Compose
 docker-compose up -d
 
-# Stop the container
-docker-compose down
+# Or build directly
+docker build -t sudoku-pro-max .
+docker run -d -p 3000:80 sudoku-pro-max
 ```
 
 The app will be available at `http://localhost:3000`
-
-### Using Docker directly
-
-```bash
-# Build the image
-docker build -t sudoku-pro-max .
-
-# Run the container
-docker run -d -p 3000:80 sudoku-pro-max
-```
 
 ## 🎮 How to Play
 
