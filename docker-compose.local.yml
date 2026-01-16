@@ -2,8 +2,10 @@ version: '3.8'
 
 services:
   sudoku-app:
-    image: ghcr.io/tmptr/sudoku-pro-max:latest
-    container_name: sudoku-pro-max
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sudoku-pro-max-local
     ports:
       - "3000:80"
     restart: unless-stopped
@@ -11,10 +13,6 @@ services:
       - NODE_ENV=production
     networks:
       - sudoku-network
-    # Uncomment below to build locally instead of pulling from registry
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
 
 networks:
   sudoku-network:
