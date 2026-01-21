@@ -2,7 +2,14 @@ version: '3.8'
 
 services:
   sudoku-app:
-    image: ghcr.io/tmptr/sudoku-pro-max:latest
+    # Uncomment the line below once GitHub Actions finishes building the image
+    # image: ghcr.io/tmptr/sudoku-pro-max:latest
+
+    # Using local build for now (comment out once image is available)
+    build:
+      context: .
+      dockerfile: Dockerfile
+
     container_name: sudoku-pro-max
     ports:
       - "3000:80"
@@ -11,10 +18,6 @@ services:
       - NODE_ENV=production
     networks:
       - sudoku-network
-    # Uncomment below to build locally instead of pulling from registry
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
 
 networks:
   sudoku-network:

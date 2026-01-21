@@ -1,0 +1,52 @@
+name: Build and Package Desktop App (Pake)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  package:
+    name: Package for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build web app
+        run: npm run build
+
+      - name: Install Pake CLI
+        run: npm install -g pake-cli
+
+      - name: Package with Pake
+        shell: bash
+        run: |
+          pake dist/index.html --name SudokuProMax --icon public/vite.svg
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: SudokuProMax-${{ matrix.os }}
+          path: |
+            *.exe
+            *.msi
+            *.dmg
+            *.pkg
+            *.deb
+            *.AppImage
